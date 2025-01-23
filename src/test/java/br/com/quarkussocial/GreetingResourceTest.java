@@ -1,4 +1,4 @@
-package io.github.TatianeMunizDev;
+package br.com.quarkussocial;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
