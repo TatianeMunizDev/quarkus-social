@@ -3,6 +3,7 @@ package br.com.quarkussocial.quarkussocial.rest;
 import br.com.quarkussocial.quarkussocial.domain.model.User;
 import br.com.quarkussocial.quarkussocial.domain.repository.UserRepository;
 import br.com.quarkussocial.quarkussocial.rest.dto.CreateUserRequest;
+import br.com.quarkussocial.quarkussocial.rest.dto.ResponseError;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 
 import javax.inject.Inject;
@@ -32,11 +33,10 @@ import java.util.Set;
     @Transactional
     public Response createUser(CreateUserRequest userRequest){
 
-        Set<ConstraintViolation<CreateUserRequest>> validations = validator.validate(userRequest);
-        if (!validations.isEmpty()){
-            ConstraintViolation<CreateUserRequest> error = validations.stream().findAny().get();
-            String errorMessage = error.getMessage();
-            return Response.status(400).entity(errorMessage).build();
+        Set<ConstraintViolation<CreateUserRequest>> violations = validator.validate(userRequest);
+        if (!violations.isEmpty()){
+//            ResponseError responseError = ResponseError.createFromValidation(violations);
+            return Response.status(400).entity(ResponseError.createFromValidation(violations)).build();
         }
 
         User user = new User();

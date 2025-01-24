@@ -2,7 +2,9 @@ package br.com.quarkussocial.quarkussocial.rest.dto;
 
 import javax.validation.ConstraintViolation;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ResponseError {
 
@@ -16,7 +18,14 @@ public class ResponseError {
 
     public static <T> ResponseError createFromValidation(Set<ConstraintViolation<T>> violations){
 
-        return null; // TODO Refactor
+        List<FieldError> errors = violations
+                .stream()
+                .map(cv -> new FieldError(cv.getPropertyPath().toString(), cv.getMessage()))
+                .collect(Collectors.toList());
+
+//        String message = "Validation Error";
+//        var responseError = new ResponseError("Validation Error", errors); OU
+        return new ResponseError("Validation Error", errors);
     }
 
     public String getMessage() {
