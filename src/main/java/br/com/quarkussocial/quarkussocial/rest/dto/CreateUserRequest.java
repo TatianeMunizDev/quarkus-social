@@ -1,8 +1,13 @@
 package br.com.quarkussocial.quarkussocial.rest.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class CreateUserRequest {
 
+    @NotBlank
     private String name;
+    @NotNull
     private Integer age;
 
     public Integer getAge() {
