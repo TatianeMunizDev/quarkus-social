@@ -33,6 +33,7 @@ import java.util.Set;
     @Transactional
     public Response createUser(CreateUserRequest userRequest){
 
+        //tratamento de erros no conteúdo do request
         Set<ConstraintViolation<CreateUserRequest>> violations = validator.validate(userRequest);
         if (!violations.isEmpty()){
             return ResponseError
@@ -40,10 +41,12 @@ import java.util.Set;
                     .withStatusCode(ResponseError.UNPROCESSABEL_ENTITY_STATUS);
         }
 
+        //seta dados request na entidade
         User user = new User();
         user.setName(userRequest.getName());
         user.setAge(userRequest.getAge());
 
+        //persiste dados do user
         repository.persist(user);
 
         return Response
