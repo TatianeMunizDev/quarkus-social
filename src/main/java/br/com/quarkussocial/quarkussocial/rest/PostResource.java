@@ -2,6 +2,7 @@ package br.com.quarkussocial.quarkussocial.rest;
 
 import br.com.quarkussocial.quarkussocial.domain.model.Post;
 import br.com.quarkussocial.quarkussocial.domain.model.User;
+import br.com.quarkussocial.quarkussocial.domain.repository.FollowerRepository;
 import br.com.quarkussocial.quarkussocial.domain.repository.PostRepository;
 import br.com.quarkussocial.quarkussocial.domain.repository.UserRepository;
 import br.com.quarkussocial.quarkussocial.rest.dto.CreatePostRequest;
@@ -22,11 +23,15 @@ public class PostResource {
 
     private UserRepository userRepository;
     private PostRepository postRepository;
+    private FollowerRepository followerRepository;
 
     @Inject
-    public PostResource(UserRepository userRepository, PostRepository postRepository){
+    public PostResource(UserRepository userRepository,
+                        PostRepository postRepository,
+                        FollowerRepository followerRepository){
         this.userRepository = userRepository;
         this.postRepository = postRepository;
+        this.followerRepository = followerRepository;
     }
 
     @POST
@@ -52,21 +57,44 @@ public class PostResource {
     }
 
     @GET
-    public Response listPosts(@PathParam("userId") Long userId){
+    public Response listPosts(
+            @PathParam("userId") Long userId,
+            @HeaderParam("followerId") Long followerId ){
+
         User user = userRepository.findById(userId);
-        if (user == null){
+        if(user == null){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        // inferença de tipo - Java 11 (var teste = ...) | Podemos passar o SORT como 2º parâmetro do find
-        var query = postRepository.find(
-                "user", Sort.by("dateTime", Sort.Direction.Descending), user);
-        var postList = query.list();
+        if(followerId == null){
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity("You forgot the header followerId")
+                    .build();
+        }
 
+        User follower = userRepository.findById(followerId);
 
-        // expressão lambda pode ser substituida por "method reference"
-        var postResponseList = postList.stream()
-        //        .map(post -> PostResponse.fromEntity(post))
+        if(follower == null){
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity("Inexistent followerId")
+                    .build();
+        }
+
+        boolean follows = followerRepository.follows(follower, user);
+        if(!follows){
+            return Response.status(Response.Status.FORBIDDEN)
+                    .entity("You can't see these posts")
+                    .build();
+        }
+
+        var query = repository.find(
+                "user", Sort.by("dateTime", Sort.Direction.Descending) , user);
+        var list = query.list();
+
+        var postResponseList = list.stream()
+//                .map(post -> PostResponse.fromEntity(post))
                 .map(PostResponse::fromEntity)
                 .collect(Collectors.toList());
 
