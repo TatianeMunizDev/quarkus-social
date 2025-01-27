@@ -89,7 +89,7 @@ public class PostResource {
                     .build();
         }
 
-        var query = repository.find(
+        var query = postRepository.find(
                 "user", Sort.by("dateTime", Sort.Direction.Descending) , user);
         var list = query.list();
 
