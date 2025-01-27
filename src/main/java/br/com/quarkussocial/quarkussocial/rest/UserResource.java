@@ -35,8 +35,9 @@ import java.util.Set;
 
         Set<ConstraintViolation<CreateUserRequest>> violations = validator.validate(userRequest);
         if (!violations.isEmpty()){
-//            ResponseError responseError = ResponseError.createFromValidation(violations);
-            return Response.status(400).entity(ResponseError.createFromValidation(violations)).build();
+            return ResponseError
+                    .createFromValidation(violations)
+                    .withStatusCode(ResponseError.UNPROCESSABEL_ENTITY_STATUS);
         }
 
         User user = new User();
@@ -45,7 +46,10 @@ import java.util.Set;
 
         repository.persist(user);
 
-        return Response.ok(userRequest).build();
+        return Response
+                .status(Response.Status.CREATED.getStatusCode())
+                .entity(userRequest)
+                .build();
     }
 
     @GET
@@ -61,7 +65,7 @@ import java.util.Set;
         User user = repository.findById(id);
         if (user != null){
             repository.delete(user);
-            return Response.ok().build();
+            return Response.noContent().build();
         }
 
         return Response.status(Response.Status.NOT_FOUND).build();
