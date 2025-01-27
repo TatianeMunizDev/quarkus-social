@@ -1,9 +1,9 @@
-package br.com.quarkussocial.quarkussocial.rest;
+package br.com.quarkussocial.rest;
 
-import br.com.quarkussocial.quarkussocial.domain.model.User;
-import br.com.quarkussocial.quarkussocial.domain.repository.UserRepository;
-import br.com.quarkussocial.quarkussocial.rest.dto.CreateUserRequest;
-import br.com.quarkussocial.quarkussocial.rest.dto.ResponseError;
+import br.com.quarkussocial.domain.model.User;
+import br.com.quarkussocial.domain.repository.UserRepository;
+import br.com.quarkussocial.rest.dto.CreateUserRequest;
+import br.com.quarkussocial.rest.dto.ResponseError;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 
 import javax.inject.Inject;

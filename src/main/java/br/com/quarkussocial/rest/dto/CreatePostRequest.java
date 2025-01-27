@@ -1,4 +1,4 @@
-package br.com.quarkussocial.quarkussocial.rest.dto;
+package br.com.quarkussocial.rest.dto;
 
 import lombok.Data;
 

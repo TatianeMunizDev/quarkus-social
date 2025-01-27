@@ -1,4 +1,4 @@
-package br.com.quarkussocial.quarkussocial.domain.model;
+package br.com.quarkussocial.domain.model;
 
 import lombok.Data;
 import javax.persistence.*;

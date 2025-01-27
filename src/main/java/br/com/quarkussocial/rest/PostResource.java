@@ -1,12 +1,12 @@
-package br.com.quarkussocial.quarkussocial.rest;
+package br.com.quarkussocial.rest;
 
-import br.com.quarkussocial.quarkussocial.domain.model.Post;
-import br.com.quarkussocial.quarkussocial.domain.model.User;
-import br.com.quarkussocial.quarkussocial.domain.repository.FollowerRepository;
-import br.com.quarkussocial.quarkussocial.domain.repository.PostRepository;
-import br.com.quarkussocial.quarkussocial.domain.repository.UserRepository;
-import br.com.quarkussocial.quarkussocial.rest.dto.CreatePostRequest;
-import br.com.quarkussocial.quarkussocial.rest.dto.PostResponse;
+import br.com.quarkussocial.domain.model.Post;
+import br.com.quarkussocial.domain.model.User;
+import br.com.quarkussocial.domain.repository.FollowerRepository;
+import br.com.quarkussocial.domain.repository.PostRepository;
+import br.com.quarkussocial.domain.repository.UserRepository;
+import br.com.quarkussocial.rest.dto.CreatePostRequest;
+import br.com.quarkussocial.rest.dto.PostResponse;
 import io.quarkus.panache.common.Sort;
 
 import javax.inject.Inject;

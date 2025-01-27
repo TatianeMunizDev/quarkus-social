@@ -1,6 +1,6 @@
-package br.com.quarkussocial.quarkussocial.domain.repository;
+package br.com.quarkussocial.domain.repository;
 
-import br.com.quarkussocial.quarkussocial.domain.model.Post;
+import br.com.quarkussocial.domain.model.Post;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 import javax.enterprise.context.ApplicationScoped;

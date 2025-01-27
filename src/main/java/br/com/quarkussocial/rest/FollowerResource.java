@@ -1,11 +1,11 @@
-package br.com.quarkussocial.quarkussocial.rest;
+package br.com.quarkussocial.rest;
 
-import br.com.quarkussocial.quarkussocial.domain.model.Follower;
-import br.com.quarkussocial.quarkussocial.domain.repository.FollowerRepository;
-import br.com.quarkussocial.quarkussocial.domain.repository.UserRepository;
-import br.com.quarkussocial.quarkussocial.rest.dto.FollowerRequest;
-import br.com.quarkussocial.quarkussocial.rest.dto.FollowerResponse;
-import br.com.quarkussocial.quarkussocial.rest.dto.FollowersPerUserResponse;
+import br.com.quarkussocial.domain.model.Follower;
+import br.com.quarkussocial.domain.repository.FollowerRepository;
+import br.com.quarkussocial.domain.repository.UserRepository;
+import br.com.quarkussocial.rest.dto.FollowerRequest;
+import br.com.quarkussocial.rest.dto.FollowerResponse;
+import br.com.quarkussocial.rest.dto.FollowersPerUserResponse;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;

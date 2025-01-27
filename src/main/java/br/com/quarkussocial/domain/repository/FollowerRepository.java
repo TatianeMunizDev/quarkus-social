@@ -1,7 +1,7 @@
-package br.com.quarkussocial.quarkussocial.domain.repository;
+package br.com.quarkussocial.domain.repository;
 
-import br.com.quarkussocial.quarkussocial.domain.model.Follower;
-import br.com.quarkussocial.quarkussocial.domain.model.User;
+import br.com.quarkussocial.domain.model.Follower;
+import br.com.quarkussocial.domain.model.User;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import io.quarkus.panache.common.Parameters;
